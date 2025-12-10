@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Book Store</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Battambang:wght@300;400;700&display=swap');
+
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #e636c6, #302de2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Battambang", sans-serif;
+    }
+
+    .login-box {
+        width: 360px;
+        padding: 30px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        animation: glow 3s infinite alternate ease-in-out;
+    }
+
+    @keyframes glow {
+        from { box-shadow: 0 0 15px #ffffff44; }
+        to   { box-shadow: 0 0 40px #ffffffaa; }
+    }
+
+    .logo {
+        width: 200px;
+        margin-bottom: 15px;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%   { transform: translateY(0px); }
+        50%  { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+    }
+
+    h2 {
+        color: white;
+        margin-bottom: 20px;
+        font-size: 26px;
+    }
+
+    input {
+        width: 85%;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: none;
+        font-size: 18px;
+        outline: none;
+        text-align: center;
+    }
+
+    .btn {
+        width: 90%;
+        padding: 14px;
+        margin-top: 20px;
+        border-radius: 10px;
+        background: #ffdd33;
+        font-size: 20px;
+        cursor: pointer;
+        border: none;
+        transition: 0.3s;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background: #ffc400;
+        transform: scale(1.05);
+        box-shadow: 0 0 10px #ffffffaa;
+    }
+
+    .error {
+        margin-top: 10px;
+        color: #d45959;
+        font-size: 16px;
+        display: none;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+    <img src="logo.png" class="logo">
+    <h2>Book Store Login</h2>
+    
+    <input type="password" id="password" placeholder="Enter Password">
+    <p class="error" id="errorMsg">Password Incorrect!</p>
+
+    <button class="btn" onclick="login()">Login</button>
+</div>
+
+<script>
+function login() {
+    const pass = document.getElementById("password").value;
+    const errorMsg = document.getElementById("errorMsg");
+
+    if (pass === "101225") {
+        window.location.href = "home.html";
+    } else {
+        errorMsg.style.display = "block";
+        setTimeout(() => errorMsg.style.display = "none", 2000);
+    }
+}
+</script>
+
+</body>
+</html>
