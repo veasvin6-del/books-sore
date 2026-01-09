@@ -458,7 +458,37 @@
     rebuildIndex();
     render();
   })();
+function render(list = books){
+    const tbody = $('#tableBody');
+    if(!tbody) return;
+    const data = Array.isArray(list) ? list : books;
+
+    // mapping index (new!)
+    const indexMap = data.map(d => books.indexOf(d));
+
+    let html = '';
+    for(let i=0;i<data.length;i++){
+      const b = data[i];
+      const khrText = (b.khr !== '' && b.khr !== undefined) ? String(Number(b.khr)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '';
+      const usdText = (b.usd !== '' && b.usd !== undefined) ? Number(b.usd).toFixed(2) : '';
+      html += `<tr data-idx="${indexMap[i]}">
+        <td style="padding-left:12px"></td>
+        <td class="col-name">${escapeHtml(b.name||'')}</td>
+        <td class="col-khr">KHR ${khrText}</td>
+        <td class="col-usd">${usdText ? ('$ ' + usdText) : ''}</td>
+        <td class="col-actions">
+          <button class="action-btn edit-btn" data-i="${indexMap[i]}">Edit</button>
+          <button class="action-btn delete-btn" data-i="${indexMap[i]}">Delete</button>
+        </td>
+      </tr>`;
+    }
+    tbody.innerHTML = html;
+
+    $$('.edit-btn').forEach(btn => btn.onclick = e => openEdit(Number(e.currentTarget.dataset.i)));
+    $$('.delete-btn').forEach(btn => btn.onclick = e => deleteBook(Number(e.currentTarget.dataset.i)));
+}
 
   </script>
 </body>
 </html>
+
